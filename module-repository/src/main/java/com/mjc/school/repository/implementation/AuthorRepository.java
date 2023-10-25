@@ -1,21 +1,18 @@
 package com.mjc.school.repository.implementation;
 
+import com.mjc.school.repository.AuthRepository;
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.aspects.OnDelete;
-import com.mjc.school.repository.datasourse.AuthorDataSource;
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("authorRepository")
-public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
+public class AuthorRepository implements AuthRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -40,12 +37,13 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public AuthorModel update(AuthorModel authorModel) {
-        entityManager.merge(authorModel);
-        return authorModel;
+        AuthorModel tmp = readById(authorModel.getId()).get();
+        tmp.setName(authorModel.getName());
+        //entityManager.merge(authorModel);
+        return tmp;
     }
 
     @Override
-    @OnDelete
     public boolean deleteById(Long id) {
         AuthorModel authorModel = entityManager.find(AuthorModel.class, id);
         try {

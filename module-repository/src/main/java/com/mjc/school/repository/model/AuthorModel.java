@@ -1,11 +1,14 @@
 package com.mjc.school.repository.model;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 
 import javax.persistence.*;
+import javax.xml.transform.Source;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +16,23 @@ import java.util.Objects;
 @Entity
 @Component
 @Table(name="AUTHOR")
-public class AuthorModel implements BaseEntity<Long> {
+public class AuthorModel implements BaseEntity<Long>{
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Column(name = "AUTHOR NAME", length = 15)
+
+    @Column(name = "AUTHOR NAME", length = 15, nullable = false )
+    @Length(min = 3, max = 15, message = "Length of name is incorrect")
     private String name;
     @CreatedDate
-    @Column(name = "CREATE_DATE", length = 30)
+    @Column(name = "CREATE_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDate;
     @LastModifiedDate
-    @Column(name = "LAST_UPDATE_DATE", length = 30)
+    @Column(name = "LAST_UPDATE_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastUpdateDate;
-    @OneToMany(mappedBy = "authorModel")
+    @OneToMany(mappedBy = "authorModel", cascade = CascadeType.REMOVE)
     private List <NewsModel> newsModelListWithId = new ArrayList<>();
 
     public AuthorModel() {
@@ -95,4 +102,11 @@ public class AuthorModel implements BaseEntity<Long> {
         return "Author's ID: " + id + ", author's name: " + name + ", create date: " + createDate + ", last update date: " + lastUpdateDate;
     }
 
+    public List<NewsModel> getNewsModelListWithId() {
+        return newsModelListWithId;
+    }
+
+    public void setNewsModelListWithId(List<NewsModel> newsModelListWithId) {
+        this.newsModelListWithId = newsModelListWithId;
+    }
 }

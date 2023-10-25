@@ -1,7 +1,14 @@
 package com.mjc.school.service.dto;
 
-import java.time.LocalDateTime;
+import com.mjc.school.repository.model.AuthorModel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class NewsDtoResponse {
     private Long id;
     private String title;
@@ -10,14 +17,16 @@ public class NewsDtoResponse {
     private LocalDateTime lastUpdateDate;
     private Long authorId;
 
-    public NewsDtoResponse(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Long authorId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
-        this.authorId = authorId;
-    }
+
+//    public NewsDtoResponse(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Long authorId) {
+//        this.id = id;
+//        this.title = title;
+//        this.content = content;
+//        this.createDate = createDate;
+//        this.lastUpdateDate = lastUpdateDate;
+//        this.authorId = authorId;
+//
+//    }
 
     public Long getId() {
         return id;
@@ -70,4 +79,6 @@ public class NewsDtoResponse {
     public String toString() {
         return "News ID: " + id + ", title: " + title + ", content: " + content + ", create date: " + createDate + ", last update date: " + lastUpdateDate + ", author ID: " + authorId;
     }
+
+
 }

@@ -2,6 +2,8 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 
+import com.mjc.school.repository.TagsRepository;
+import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
 
 import javax.persistence.EntityManager;
@@ -9,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-public class TagRepository implements BaseRepository<TagModel, Long> {
+public class TagRepository implements TagsRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -54,5 +56,17 @@ public class TagRepository implements BaseRepository<TagModel, Long> {
         TagModel tagModel = entityManager.find(TagModel.class, id);
         return tagModel!=null;
     }
-    //public TagModel getTagsByNewsId(Long newsId){}
+    public List<TagModel> getTagsByNewsId(Long newsId){
+        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
+       return newsModel.getTags();
+        }
+
+    @Override
+    public List<TagModel> readTagsByNewsId(Long newsId) {
+        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
+        if(newsModel!=null){
+            return newsModel.getTags();
+        } throw new  RuntimeException();
+    }
 }
+

@@ -1,31 +1,42 @@
 package com.mjc.school.repository.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 @Table(name="NEWS")
 @Component
-public class NewsModel implements BaseEntity<Long> {
+@AllArgsConstructor
+public class NewsModel implements BaseEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "NEWS_TITLE", length = 30)
+    @Length(min = 5, max = 30, message = "Length of title is incorrect")
     private String title;
     @Column(name = "NEWS_CONTENT", length = 255)
+    @Length(min = 5, max = 255, message = "Length of content is incorrect")
     private String content;
     @CreatedDate
-    @Column(name = "CREATE_DATE", length = 30)
+    @Column(name = "CREATE_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDate;
     @LastModifiedDate
-    @Column(name = "LAST_UPDATE_DATE", length = 30)
+    @Column(name = "LAST_UPDATE_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastUpdateDate;
     @Column(name = "AUTHOR ID", length = 3)
     private Long authorId;
@@ -33,18 +44,14 @@ public class NewsModel implements BaseEntity<Long> {
     @JoinColumn(name="AUTHOR_ID")
     private AuthorModel authorModel;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "TAGS_OF_NEWS", joinColumns =@JoinColumn(name = "NEWS_ID"), inverseJoinColumns = @JoinColumn(name = "TAGS_ID"))
+    private List<TagModel> tags = new ArrayList<>();
+
     public NewsModel() {
 
     }
 
-    public NewsModel(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Long authorId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
-        this.authorId = authorId;
-    }
 
 
     public String getTitle() {
@@ -126,5 +133,22 @@ public class NewsModel implements BaseEntity<Long> {
 
     public String toString() {
         return "news ID: " + id + ", title: " + title + ", content: " + content + ", create date: " + createDate + ", last update date: " + lastUpdateDate + ", author's ID: " + authorId;
+    }
+
+
+    public void setTags(List<TagModel> tags) {
+        this.tags = tags;
+    }
+
+    public List<TagModel> getTags() {
+        return tags;
+    }
+
+    public AuthorModel getAuthorModel() {
+        return authorModel;
+    }
+
+    public void setAuthorModel(AuthorModel authorModel) {
+        this.authorModel = authorModel;
     }
 }

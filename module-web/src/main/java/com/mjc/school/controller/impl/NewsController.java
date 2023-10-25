@@ -21,31 +21,31 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
         this.newsService = newsServiceImpl;
     }
 
-    @CommandHandler("GetAllNews")
+    @CommandHandler("1")
     @Override
     public List<NewsDtoResponse> readAll() {
         return newsService.readAll();
     }
 
-    @CommandHandler("ReadNewsById")
+    @CommandHandler("2")
     @Override
     public NewsDtoResponse readById(@CommandParam("newsId") Long id) {
         return newsService.readById(id);
     }
 
-    @CommandHandler("CreateNews")
+    @CommandHandler("3")
     @Override
     public NewsDtoResponse create(@CommandBody NewsDtoRequest createRequest) {
         return newsService.create(createRequest);
     }
 
-    @CommandHandler("UpdateNews")
+    @CommandHandler("4")
     @Override
     public NewsDtoResponse update(@CommandBody NewsDtoRequest updateRequest) {
         return newsService.update(updateRequest);
     }
 
-    @CommandHandler("DeleteNews")
+    @CommandHandler("5")
     @Override
     public boolean deleteById(@CommandParam("newsId") Long id) {
         return newsService.deleteById(id);

@@ -1,13 +1,15 @@
 package com.mjc.school.service.implementation;
 
+import com.mjc.school.repository.AuthRepository;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.implementation.AuthorRepository;
 import com.mjc.school.repository.model.AuthorModel;
+import com.mjc.school.service.AuthorService;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.service.mapper.Mapper;
-import com.mjc.school.service.validation.ValidateAuthor;
+//import com.mjc.school.service.validation.ValidateAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("authorServiceImpl")
-public class AuthorServiceImpl implements BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> {
-    private BaseRepository<AuthorModel, Long> authorRepository;
+public class AuthorServiceImpl implements AuthorService {
+    private AuthRepository authorRepository;
 
     @Autowired
-    public AuthorServiceImpl(BaseRepository<AuthorModel, Long> authorRepository) {
+    public AuthorServiceImpl( AuthRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
@@ -34,13 +36,13 @@ public class AuthorServiceImpl implements BaseService<AuthorDtoRequest, AuthorDt
         return opt.map(Mapper.INSTANCE::ModelAuthorToDTO).orElse(null);
     }
 
-    @ValidateAuthor
+//    @ValidateAuthor
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
         return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.create(Mapper.INSTANCE.DTOAuthorToModel(createRequest)));
     }
 
-    @ValidateAuthor
+  //  @ValidateAuthor
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
 
@@ -50,5 +52,11 @@ public class AuthorServiceImpl implements BaseService<AuthorDtoRequest, AuthorDt
     @Override
     public boolean deleteById(Long id) {
         return authorRepository.deleteById(id);
+    }
+
+
+    @Override
+    public AuthorDtoResponse getAuthorByNewsId(Long newsId) {
+        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.getAuthorByNewsId(newsId));
     }
 }

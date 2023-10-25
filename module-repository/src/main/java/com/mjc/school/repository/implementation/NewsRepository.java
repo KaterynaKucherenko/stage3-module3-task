@@ -1,16 +1,11 @@
 package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.datasourse.NewsDataSource;
-import com.mjc.school.repository.model.BaseEntity;
 import com.mjc.school.repository.model.NewsModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +13,12 @@ import java.util.Optional;
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
     @PersistenceContext
     private EntityManager entityManager;
-    private NewsDataSource newsDataSource;
-
-    @Autowired
-    public NewsRepository(NewsDataSource newsDataSource) {
-        this.newsDataSource = newsDataSource;
-    }
+//    private NewsDataSource newsDataSource;
+//
+//    @Autowired
+//    public NewsRepository(NewsDataSource newsDataSource) {
+//        this.newsDataSource = newsDataSource;
+//    }
 
     @Override
     public List<NewsModel> readAll() {

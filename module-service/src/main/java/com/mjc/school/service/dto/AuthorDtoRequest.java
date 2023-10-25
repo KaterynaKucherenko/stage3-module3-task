@@ -1,19 +1,25 @@
 package com.mjc.school.service.dto;
 
 import com.mjc.school.repository.implementation.NewsRepository;
+import com.mjc.school.repository.model.NewsModel;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
+import java.util.List;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthorDtoRequest {
+
     private Long id;
     private String name;
+    private List<Long> newsModelListWithId;
 
-    public AuthorDtoRequest(String name) {
-        this.name = name;
-    }
-
-    public AuthorDtoRequest(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -32,4 +38,11 @@ public class AuthorDtoRequest {
     }
 
 
+    public List<Long> getNewsModelListWithId() {
+        return newsModelListWithId;
+    }
+
+    public void setNewsModelListWithId(List<Long> newsModelListWithId) {
+        this.newsModelListWithId = newsModelListWithId;
+    }
 }

@@ -1,19 +1,25 @@
 package com.mjc.school.service.dto;
 
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthorDtoResponse {
     private Long id;
     private String name;
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
 
-    public AuthorDtoResponse(Long id, String name, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
-        this.id = id;
-        this.name = name;
-        this.createDate = createDate;
-        this.lastUpdateDate = lastUpdateDate;
-    }
+//    public AuthorDtoResponse(Long id, String name, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
+//        this.id = id;
+//        this.name = name;
+//        this.createDate = createDate;
+//        this.lastUpdateDate = lastUpdateDate;
+//    }
 
     public Long getId() {
         return id;
