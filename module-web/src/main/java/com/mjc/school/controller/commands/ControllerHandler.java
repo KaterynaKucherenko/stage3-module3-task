@@ -27,6 +27,7 @@ public class ControllerHandler {
     public ControllerHandler(AuthorController authorController, NewsController newsController, TagsController tagsController) {
         this.authorController = authorController;
         this.newsController = newsController;
+        this.tagsController = tagsController;
     }
 
     @CommandHandler("1")
@@ -34,13 +35,13 @@ public class ControllerHandler {
         newsController.readAll().forEach(System.out::println);
     }
 
-    @CommandHandler("2")
+    @CommandHandler(value = "2")
     public void readById() {
         System.out.println("Write the news ID");
         System.out.println(newsController.readById(Long.parseLong(scanner.nextLine())));
     }
 
-    @CommandHandler("3")
+    @CommandHandler(value = "3")
     public void createNews() {
         boolean isValid = false;
         if (!isValid) {
@@ -62,7 +63,7 @@ public class ControllerHandler {
         }
     }
 
-    @CommandHandler("4")
+    @CommandHandler(value = "4")
     public void updateNews() {
         boolean isValid = false;
         if (!isValid) {
@@ -86,7 +87,7 @@ public class ControllerHandler {
         }
     }
 
-    @CommandHandler("5")
+    @CommandHandler(value = "5")
     public void deleteNews() {
         System.out.println("Write the news ID for delete");
         if (newsController.deleteById(Long.parseLong(scanner.nextLine()))) {
@@ -96,18 +97,41 @@ public class ControllerHandler {
         }
     }
 
-    @CommandHandler("6")
+    @CommandHandler(value = "6")
+    public void getNewsByParams() {
+        boolean isValid = false;
+        List<NewsDtoRequest> result = new ArrayList<>();
+        if (!isValid) {
+            try {
+                System.out.println("Write the tags name for search news (press Enter to skip parameter)");
+                String tagName = scanner.nextLine();
+                System.out.println("Write the tags ID for search news (press Enter to skip parameter)");
+                Long tagId = Long.parseLong(scanner.nextLine());
+                System.out.println("Write the author`s name for search news (press Enter to skip parameter)");
+                String authorName = scanner.nextLine();
+                System.out.println("Write the title for search news (press Enter to skip parameter)");
+                String title = scanner.nextLine();
+                System.out.println("Write the content for search news (press Enter to skip parameter)");
+                String content = scanner.nextLine();
+                newsController.getNewsByParams(tagName, tagId, authorName, title, content).stream().forEach(System.out::println);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+    }
+
+    @CommandHandler(value = "7")
     public void readAllAuthors() {
         authorController.readAll().forEach(System.out::println);
     }
 
-    @CommandHandler("7")
+    @CommandHandler(value = "8")
     public void readAuthorById() {
         System.out.println("Write the author ID");
         System.out.println(authorController.readById(Long.parseLong(scanner.nextLine())));
     }
 
-    @CommandHandler("8")
+    @CommandHandler(value = "9")
     public void createAuthor() {
         boolean isValid = false;
         if (!isValid) {
@@ -124,7 +148,7 @@ public class ControllerHandler {
         }
     }
 
-    @CommandHandler("9")
+    @CommandHandler(value = "10")
     public void updateAuthor() {
         boolean isValid = false;
         if (!isValid) {
@@ -140,7 +164,7 @@ public class ControllerHandler {
         }
     }
 
-    @CommandHandler("10")
+    @CommandHandler(value = "11")
     public void deleteAuthor() {
         System.out.println("Write the author ID for delete");
         if (authorController.deleteById(Long.parseLong(scanner.nextLine()))) {
@@ -150,7 +174,59 @@ public class ControllerHandler {
         }
     }
 
-}
+    @CommandHandler(value = "12")
+    public void getAllTags() {
+        tagsController.readAll().forEach(System.out::println);
+    }
 
+    @CommandHandler(value = "13")
+    public void readTagsById() {
+        System.out.println("Write the tags ID");
+        System.out.println(tagsController.readById(Long.parseLong(scanner.nextLine())));
+    }
+
+    @CommandHandler(value = "14")
+    public void createTags() {
+        boolean isValid = false;
+        if (!isValid) {
+            try {
+                System.out.println("Write the tag name");
+                String name = scanner.nextLine();
+                TagDtoRequest tagDtoRequest = new TagDtoRequest(null, name);
+                System.out.println(tagsController.create(tagDtoRequest));
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+    }
+
+    @CommandHandler(value = "15")
+    public void updateTags() {
+        boolean isValid = false;
+        if (!isValid) {
+            try {
+                System.out.println("Write the tag's ID for updating");
+                Long id = Long.parseLong(scanner.nextLine());
+                System.out.println("Write the new tag name");
+                String name = scanner.nextLine();
+                TagDtoRequest tagDtoRequest = new TagDtoRequest(id, name);
+                System.out.println(tagsController.update(tagDtoRequest));
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+
+    }
+
+    @CommandHandler(value = "16")
+    public void deleteTags() {
+        System.out.println("Write the tag ID for delete");
+        if (tagsController.deleteById(Long.parseLong(scanner.nextLine()))) {
+            System.out.println("Tag was deleted");
+        } else {
+            System.out.println("Tag wasn't deleted");
+        }
+    }
+}
 
 

@@ -21,7 +21,7 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthRepository authorRepository;
 
     @Autowired
-    public AuthorServiceImpl( AuthRepository authorRepository) {
+    public AuthorServiceImpl(AuthRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
@@ -36,17 +36,17 @@ public class AuthorServiceImpl implements AuthorService {
         return opt.map(Mapper.INSTANCE::ModelAuthorToDTO).orElse(null);
     }
 
-//    @ValidateAuthor
+    //    @ValidateAuthor
     @Override
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
-        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.create(Mapper.INSTANCE.DTOAuthorToModel(createRequest)));
+        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.create(Mapper.INSTANCE.DtoAuthorToModel(createRequest)));
     }
 
-  //  @ValidateAuthor
+    //  @ValidateAuthor
     @Override
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
 
-        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.update(Mapper.INSTANCE.DTOAuthorToModel(updateRequest)));
+        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.update(Mapper.INSTANCE.DtoAuthorToModel(updateRequest)));
     }
 
     @Override

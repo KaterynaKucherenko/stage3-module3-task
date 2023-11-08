@@ -1,8 +1,8 @@
 package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.NewsRepository;
 import com.mjc.school.repository.model.NewsModel;
-import com.mjc.school.service.BaseService;
+import com.mjc.school.service.NewsService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.mapper.Mapper;
@@ -12,13 +12,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service("newsServiceImpl")
-public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
-    private BaseRepository<NewsModel, Long> newsRepository;
+public class NewsServiceImpl implements NewsService {
+    private NewsRepository newsRepository;
 
     @Autowired
-    public NewsServiceImpl(BaseRepository<NewsModel, Long> newsRepository) {
+    public NewsServiceImpl(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
     }
 
@@ -40,7 +41,7 @@ public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoRespo
         return Mapper.INSTANCE.ModelNewsToDTO(newsRepository.create(Mapper.INSTANCE.DTONewsToModel(createRequest)));
     }
 
-   // @ValidateNews
+    // @ValidateNews
     @Override
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         return Mapper.INSTANCE.ModelNewsToDTO(newsRepository.update(Mapper.INSTANCE.DTONewsToModel(updateRequest)));
@@ -49,5 +50,12 @@ public class NewsServiceImpl implements BaseService<NewsDtoRequest, NewsDtoRespo
     @Override
     public boolean deleteById(Long id) {
         return newsRepository.deleteById(id);
+    }
+
+    @Override
+    public List<NewsDtoResponse> getNewsByParams(String tagName, Long tagId, String authorName, String title, String content) {
+        return newsRepository.getNewsByParams(tagName, tagId, authorName, title, content).stream().map(Mapper.INSTANCE::ModelNewsToDTO).collect(Collectors.toList());
+
+
     }
 }

@@ -8,6 +8,7 @@ import com.mjc.school.repository.model.TagModel;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,58 +16,66 @@ public class TagRepository implements TagsRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     @Override
     public List<TagModel> readAll() {
-        List <TagModel> result = entityManager.createQuery("SELECT a from TagModel a", TagModel.class).getResultList();
+        List<TagModel> result = entityManager.createQuery("SELECT a from TagModel a", TagModel.class).getResultList();
         return result;
     }
 
+    @Transactional
     @Override
     public Optional<TagModel> readById(Long id) {
         return Optional.ofNullable((TagModel) entityManager.createQuery("FROM TagModel a WHERE a.id=id"));
     }
 
+    @Transactional
     @Override
     public TagModel create(TagModel tagModel) {
-         entityManager.persist(tagModel);
+        entityManager.persist(tagModel);
         return tagModel;
     }
 
+    @Transactional
     @Override
     public TagModel update(TagModel tagModel) {
         entityManager.merge(tagModel);
         return tagModel;
     }
 
+    @Transactional
     @Override
     public boolean deleteById(Long id) {
         TagModel tagModel = entityManager.find(TagModel.class, id);
-        try{
+        try {
             entityManager.remove(tagModel);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
+    @Transactional
     @Override
     public boolean existById(Long id) {
         TagModel tagModel = entityManager.find(TagModel.class, id);
-        return tagModel!=null;
+        return tagModel != null;
     }
-    public List<TagModel> getTagsByNewsId(Long newsId){
-        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
-       return newsModel.getTags();
-        }
 
+    public List<TagModel> getTagsByNewsId(Long newsId) {
+        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
+        return newsModel.getTags();
+    }
+
+    @Transactional
     @Override
     public List<TagModel> readTagsByNewsId(Long newsId) {
         NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
-        if(newsModel!=null){
+        if (newsModel != null) {
             return newsModel.getTags();
-        } throw new  RuntimeException();
+        }
+        throw new RuntimeException();
     }
 }
 

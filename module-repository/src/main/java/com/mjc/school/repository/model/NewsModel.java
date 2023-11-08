@@ -17,7 +17,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name="NEWS")
+@Table(name = "NEWS")
 @Component
 @AllArgsConstructor
 public class NewsModel implements BaseEntity<Long>, Serializable {
@@ -41,17 +41,16 @@ public class NewsModel implements BaseEntity<Long>, Serializable {
     @Column(name = "AUTHOR ID", length = 3)
     private Long authorId;
     @ManyToOne
-    @JoinColumn(name="AUTHOR_ID")
+    @JoinColumn(name = "AUTHOR_ID")
     private AuthorModel authorModel;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "TAGS_OF_NEWS", joinColumns =@JoinColumn(name = "NEWS_ID"), inverseJoinColumns = @JoinColumn(name = "TAGS_ID"))
+    @JoinTable(name = "TAGS_OF_NEWS", joinColumns = @JoinColumn(name = "NEWS_ID"), inverseJoinColumns = @JoinColumn(name = "TAGS_ID"))
     private List<TagModel> tags = new ArrayList<>();
 
     public NewsModel() {
 
     }
-
 
 
     public String getTitle() {

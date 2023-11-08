@@ -2,41 +2,47 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotation.CommandHandler;
+import com.mjc.school.service.TagService;
 import com.mjc.school.service.dto.TagDtoRequest;
 import com.mjc.school.service.dto.TagDtoResponse;
 
 import java.util.List;
 
 public class TagsController implements BaseController<TagDtoRequest, TagDtoResponse, Long> {
-    private BaseController<TagDtoRequest, TagDtoResponse, Long> tagsServiceImpl;
+    private TagService tagsService;
 
-    public TagsController(BaseController<TagDtoRequest, TagDtoResponse, Long> tagsServiceImpl){
-        this.tagsServiceImpl=tagsServiceImpl;
+    public TagsController(TagService tagsService) {
+        this.tagsService = tagsService;
     }
-    @CommandHandler("GetAllTags")
+
+    @CommandHandler("12")
     @Override
     public List<TagDtoResponse> readAll() {
-       return tagsServiceImpl.readAll();
+        return tagsService.readAll();
 
     }
-    @CommandHandler("ReadTagsById")
+
+    @CommandHandler("13")
     @Override
     public TagDtoResponse readById(Long id) {
-       return tagsServiceImpl.readById(id);
+        return tagsService.readById(id);
     }
-    @CommandHandler("CreateTags")
+
+    @CommandHandler("14")
     @Override
     public TagDtoResponse create(TagDtoRequest createRequest) {
-        return tagsServiceImpl.create(createRequest);
+        return tagsService.create(createRequest);
     }
-    @CommandHandler("UpdateTags")
+
+    @CommandHandler("15")
     @Override
     public TagDtoResponse update(TagDtoRequest updateRequest) {
-        return tagsServiceImpl.update(updateRequest);
+        return tagsService.update(updateRequest);
     }
-    @CommandHandler("DeleteTags")
+
+    @CommandHandler("16")
     @Override
     public boolean deleteById(Long id) {
-        return tagsServiceImpl.deleteById(id);
+        return tagsService.deleteById(id);
     }
 }

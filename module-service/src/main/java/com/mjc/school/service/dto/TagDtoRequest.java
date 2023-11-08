@@ -3,12 +3,13 @@ package com.mjc.school.service.dto;
 public class TagDtoRequest {
     private Long id;
     private String name;
-    public TagDtoRequest(){
+
+    public TagDtoRequest() {
     }
 
-    public TagDtoRequest(Long id, String name){
-        this.id=id;
-        this.name=name;
+    public TagDtoRequest(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {

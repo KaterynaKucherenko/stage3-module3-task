@@ -1,10 +1,10 @@
-package com.mjc.school.service;
+package com.mjc.school.controller;
 
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 
 import java.util.List;
 
-public interface NewsService extends BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
+public interface NewsController extends BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
     List<NewsDtoResponse> getNewsByParams(String tagName, Long tagId, String authorName, String title, String content);
 }

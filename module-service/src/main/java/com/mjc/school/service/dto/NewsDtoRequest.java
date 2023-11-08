@@ -1,34 +1,29 @@
 package com.mjc.school.service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class NewsDtoRequest {
     private Long id;
     private String title;
     private String content;
     private Long authorId;
-    private List<Long> tagsId;
+    private List<Long> tags;
 
 
-//    public NewsDtoRequest(String title, String content, Long authorId) {
-//        this.title = title;
-//        this.content = content;
-//        this.authorId = authorId;
-//    }
-//
-//    public NewsDtoRequest(Long id, String title, String content, Long authorId) {
-//        this.id = id;
-//        this.title = title;
-//        this.content = content;
-//        this.authorId = authorId;
-//    }
+    public NewsDtoRequest() {
+
+    }
+
+    public NewsDtoRequest(Long id, String title, String content, Long authorId, List<Long> tagsId) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.authorId = authorId;
+        this.tags =tagsId;
+    }
 
     public Long getId() {
         return id;
@@ -62,10 +57,11 @@ public class NewsDtoRequest {
         this.authorId = authorId;
     }
 
-    public List<Long> getTagsId(){
-        return tagsId;
+    public List<Long> getTags() {
+        return tags;
     }
-    public void setTagsId (List<Long>tagsId){
-        this.tagsId=tagsId;
+
+    public void setTags(List<Long> tags) {
+        this.tags = tags;
     }
 }

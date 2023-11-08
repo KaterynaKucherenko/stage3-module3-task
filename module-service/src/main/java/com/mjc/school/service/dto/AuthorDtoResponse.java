@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +15,6 @@ public class AuthorDtoResponse {
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
 
-//    public AuthorDtoResponse(Long id, String name, LocalDateTime createDate, LocalDateTime lastUpdateDate) {
-//        this.id = id;
-//        this.name = name;
-//        this.createDate = createDate;
-//        this.lastUpdateDate = lastUpdateDate;
-//    }
 
     public Long getId() {
         return id;

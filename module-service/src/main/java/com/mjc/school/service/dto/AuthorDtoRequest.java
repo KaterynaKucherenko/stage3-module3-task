@@ -11,14 +11,20 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthorDtoRequest {
 
     private Long id;
     private String name;
     private List<Long> newsModelListWithId;
+
+    public AuthorDtoRequest(){}
+    public AuthorDtoRequest(Long id, String name, List<Long> newsModelListWithId){
+        this.id=id;
+        this.name=name;
+        this.newsModelListWithId=newsModelListWithId;
+    }
 
 
     public Long getId() {
