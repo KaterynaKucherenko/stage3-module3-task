@@ -28,6 +28,7 @@ subprojects {
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
         testImplementation "com.tngtech.archunit:archunit:$archUnitVersion"
         testImplementation "com.tngtech.archunit:archunit-junit5:1.0.0"
+        testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.24.2'
 
         annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
         implementation "org.mapstruct:mapstruct:$mapstructVersion"
