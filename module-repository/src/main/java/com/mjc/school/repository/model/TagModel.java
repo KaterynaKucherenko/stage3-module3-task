@@ -1,5 +1,6 @@
 package com.mjc.school.repository.model;
 
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,8 @@ public class TagModel implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "TAGS_NAME", length = 15)
-    @Length(min = 3, max = 15, message = "Length of tags name is incorrect")
+    @Column(name = "TAGS_NAME")
+    @Size(min = 3, max = 15)
     private String name;
 
     @ManyToMany(mappedBy = "news", fetch = FetchType.LAZY)

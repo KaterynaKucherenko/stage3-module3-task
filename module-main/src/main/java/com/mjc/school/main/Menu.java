@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 @Component
 public class Menu {
     private ControllerHandler controllerHandler;
-    private String numOfMethod;
+
+    public Menu() {
+    }
 
     public Menu(ControllerHandler controllerHandler) {
         this.controllerHandler = controllerHandler;

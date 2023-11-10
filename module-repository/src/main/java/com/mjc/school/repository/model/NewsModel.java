@@ -1,5 +1,6 @@
 package com.mjc.school.repository.model;
 
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Required;
@@ -24,11 +25,11 @@ public class NewsModel implements BaseEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "NEWS_TITLE", length = 30)
-    @Length(min = 5, max = 30, message = "Length of title is incorrect")
+    @Column(name = "NEWS_TITLE")
+    @Size(min = 5, max = 30)
     private String title;
-    @Column(name = "NEWS_CONTENT", length = 255)
-    @Length(min = 5, max = 255, message = "Length of content is incorrect")
+    @Column(name = "NEWS_CONTENT")
+    @Size(min = 5, max = 255)
     private String content;
     @CreatedDate
     @Column(name = "CREATE_DATE")
@@ -38,7 +39,7 @@ public class NewsModel implements BaseEntity<Long>, Serializable {
     @Column(name = "LAST_UPDATE_DATE")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastUpdateDate;
-    @Column(name = "AUTHOR ID", length = 3)
+    @Column(name = "AUTHOR ID")
     private Long authorId;
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID")

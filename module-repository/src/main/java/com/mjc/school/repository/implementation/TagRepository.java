@@ -5,48 +5,51 @@ import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.TagsRepository;
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class TagRepository implements TagsRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     @Override
     public List<TagModel> readAll() {
         List<TagModel> result = entityManager.createQuery("SELECT a from TagModel a", TagModel.class).getResultList();
         return result;
     }
 
-    @Transactional
+
     @Override
     public Optional<TagModel> readById(Long id) {
-        return Optional.ofNullable((TagModel) entityManager.createQuery("FROM TagModel a WHERE a.id=id"));
+        return Optional.ofNullable((TagModel) entityManager.createQuery("SELECT a FROM TagModel a WHERE a.id=:id", TagModel.class).setParameter("id", id).getSingleResult());
     }
 
-    @Transactional
+
     @Override
     public TagModel create(TagModel tagModel) {
         entityManager.persist(tagModel);
         return tagModel;
     }
 
-    @Transactional
+
     @Override
     public TagModel update(TagModel tagModel) {
         entityManager.merge(tagModel);
         return tagModel;
     }
 
-    @Transactional
+
     @Override
     public boolean deleteById(Long id) {
-        TagModel tagModel = entityManager.find(TagModel.class, id);
+        TagModel tagModel = entityManager.getReference(TagModel.class, id);
         try {
             entityManager.remove(tagModel);
             return true;
@@ -56,26 +59,21 @@ public class TagRepository implements TagsRepository {
         }
     }
 
-    @Transactional
+
     @Override
     public boolean existById(Long id) {
-        TagModel tagModel = entityManager.find(TagModel.class, id);
+        TagModel tagModel = entityManager.getReference(TagModel.class, id);
         return tagModel != null;
     }
 
-    public List<TagModel> getTagsByNewsId(Long newsId) {
-        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
-        return newsModel.getTags();
-    }
 
-    @Transactional
     @Override
     public List<TagModel> readTagsByNewsId(Long newsId) {
         NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
         if (newsModel != null) {
             return newsModel.getTags();
         }
-        throw new RuntimeException();
+        throw new EntityNotFoundException("News with " + newsId + " ID not found");
     }
 }
 
