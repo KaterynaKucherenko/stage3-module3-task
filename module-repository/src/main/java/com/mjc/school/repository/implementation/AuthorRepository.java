@@ -3,6 +3,7 @@ package com.mjc.school.repository.implementation;
 import com.mjc.school.repository.AuthRepository;
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,9 @@ public class AuthorRepository implements AuthRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    public AuthorRepository(){}
 
 
     @Override

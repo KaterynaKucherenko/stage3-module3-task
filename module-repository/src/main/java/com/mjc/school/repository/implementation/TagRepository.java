@@ -5,6 +5,7 @@ import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.TagsRepository;
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,9 @@ import java.util.Optional;
 public class TagRepository implements TagsRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    public TagRepository(){}
 
 
     @Override
