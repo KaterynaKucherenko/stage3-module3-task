@@ -1,6 +1,7 @@
 package com.mjc.school.repository.model;
 
-
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +24,7 @@ public class AuthorModel implements BaseEntity<Long> {
     private Long id;
 
     @Column(name = "AUTHOR NAME")
-    //@Size(min = 3, max = 15)
+    @Size(min = 3, max = 15)
     private String name;
     @CreatedDate
     @Column(name = "CREATE_DATE")

@@ -13,12 +13,12 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Controller
+@Controller("authorController")
 public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
-    private final BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> authorService;
+    private final AuthorService authorService;
 
     @Autowired
-    public AuthorController(BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> authorServiceImpl) {
+    public AuthorController(AuthorService authorServiceImpl) {
         this.authorService = authorServiceImpl;
     }
 

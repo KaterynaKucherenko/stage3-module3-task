@@ -2,7 +2,7 @@ package com.mjc.school.service.dto;
 
 import com.mjc.school.repository.implementation.NewsRepository;
 import com.mjc.school.repository.model.NewsModel;
-
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
