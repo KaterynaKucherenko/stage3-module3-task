@@ -5,6 +5,6 @@ import com.mjc.school.service.dto.NewsDtoResponse;
 
 import java.util.List;
 
-public interface NewsController extends BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
+public interface BaseNewsController extends BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
     List<NewsDtoResponse> getNewsByParams(String tagName, Long tagId, String authorName, String title, String content);
 }

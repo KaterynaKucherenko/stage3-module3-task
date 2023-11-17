@@ -1,6 +1,7 @@
 package com.mjc.school.controller.impl;
 
 
+import com.mjc.school.controller.BaseNewsController;
 import com.mjc.school.controller.annotation.CommandBody;
 import com.mjc.school.controller.annotation.CommandHandler;
 import com.mjc.school.controller.annotation.CommandParam;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller("newsController")
-public class NewsController implements com.mjc.school.controller.NewsController {
+public class NewsController implements BaseNewsController {
     private final NewsService newsService;
 
     @Autowired
