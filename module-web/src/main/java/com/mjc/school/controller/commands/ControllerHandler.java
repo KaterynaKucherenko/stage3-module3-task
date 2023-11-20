@@ -21,7 +21,7 @@ public class ControllerHandler {
     private AuthorController authorController;
     private NewsController newsController;
     private TagsController tagsController;
-    private Scanner scanner = new Scanner(System.in);
+
 
 
     public ControllerHandler(AuthorController authorController, NewsController newsController, TagsController tagsController) {
@@ -38,6 +38,7 @@ public class ControllerHandler {
     @CommandHandler(value = "2")
     public void readById() {
         System.out.println("Write the news ID");
+        Scanner scanner = new Scanner(System.in);
         System.out.println(newsController.readById(Long.parseLong(scanner.nextLine())));
     }
 
@@ -46,6 +47,7 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the news title");
                 String title = scanner.nextLine();
                 System.out.println("Write the news content");
@@ -68,6 +70,7 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the news ID for updating");
                 Long newsId = Long.parseLong(scanner.nextLine());
                 System.out.println("Write the new news title");
@@ -90,6 +93,7 @@ public class ControllerHandler {
     @CommandHandler(value = "5")
     public void deleteNews() {
         System.out.println("Write the news ID for delete");
+        Scanner scanner = new Scanner(System.in);
         if (newsController.deleteById(Long.parseLong(scanner.nextLine()))) {
             System.out.println("News was deleted");
         } else {
@@ -103,6 +107,7 @@ public class ControllerHandler {
         List<NewsDtoRequest> result = new ArrayList<>();
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the tags name for search news (press Enter to skip parameter)");
                 String tagName = scanner.nextLine();
                 System.out.println("Write the tags ID for search news (press Enter to skip parameter)");
@@ -128,6 +133,7 @@ public class ControllerHandler {
     @CommandHandler(value = "8")
     public void readAuthorById() {
         System.out.println("Write the author ID");
+        Scanner scanner = new Scanner(System.in);
         System.out.println(authorController.readById(Long.parseLong(scanner.nextLine())));
     }
 
@@ -137,6 +143,7 @@ public class ControllerHandler {
         if (!isValid) {
             try {
                 System.out.println("Write the author name");
+                Scanner scanner = new Scanner(System.in);
                 String name = scanner.nextLine();
                 AuthorDtoRequest authorDtoRequest = new AuthorDtoRequest(null, name, null);
                 System.out.println(authorController.create(authorDtoRequest));
@@ -153,6 +160,7 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the author ID for updating");
                 Long authId = Long.parseLong(scanner.nextLine());
                 System.out.println("Write the new author name");
@@ -167,6 +175,7 @@ public class ControllerHandler {
     @CommandHandler(value = "11")
     public void deleteAuthor() {
         System.out.println("Write the author ID for delete");
+        Scanner scanner = new Scanner(System.in);
         if (authorController.deleteById(Long.parseLong(scanner.nextLine()))) {
             System.out.println("Author was deleted");
         } else {
@@ -182,6 +191,7 @@ public class ControllerHandler {
     @CommandHandler(value = "13")
     public void readTagsById() {
         System.out.println("Write the tags ID");
+        Scanner scanner = new Scanner(System.in);
         System.out.println(tagsController.readById(Long.parseLong(scanner.nextLine())));
     }
 
@@ -190,6 +200,7 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the tag name");
                 String name = scanner.nextLine();
                 TagDtoRequest tagDtoRequest = new TagDtoRequest(null, name);
@@ -205,6 +216,7 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write the tag's ID for updating");
                 Long id = Long.parseLong(scanner.nextLine());
                 System.out.println("Write the new tag name");
@@ -220,6 +232,7 @@ public class ControllerHandler {
 
     @CommandHandler(value = "16")
     public void deleteTags() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Write the tag ID for delete");
         if (tagsController.deleteById(Long.parseLong(scanner.nextLine()))) {
             System.out.println("Tag was deleted");

@@ -9,12 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 import java.lang.reflect.InvocationTargetException;
-@SpringBootApplication
-@EnableAspectJAutoProxy
-@EnableJpaAuditing
+
 public class Main {
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
-        ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
         Menu menu = applicationContext.getBean(Menu.class);
         menu.start();
     }
