@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class Menu {
     private ControllerHandler controllerHandler;
 
-    public Menu() {
-    }
 
     public Menu(ControllerHandler controllerHandler) {
         this.controllerHandler = controllerHandler;

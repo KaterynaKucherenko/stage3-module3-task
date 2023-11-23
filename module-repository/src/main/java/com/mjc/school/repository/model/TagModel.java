@@ -11,17 +11,17 @@ import java.util.List;
 
 @Entity
 @Component
-@Table(name = "TAGS")
+@Table(name = "tags")
 public class TagModel implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "TAGS_NAME")
+    @Column(name = "tags_name")
     @Size(min = 3, max = 15)
     private String name;
 
-    @ManyToMany(mappedBy = "news", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private List<NewsModel> news = new ArrayList<>();
 
     public TagModel() {

@@ -24,7 +24,7 @@ public class AuthorRepository implements AuthRepository {
 
     @Override
     public List<AuthorModel> readAll() {
-        List<AuthorModel> result = entityManager.createQuery("SELECT a from AuthorModel a", AuthorModel.class).getResultList();
+        List<AuthorModel> result = entityManager.createQuery("SELECT a FROM AuthorModel a", AuthorModel.class).getResultList();
         return result;
     }
 

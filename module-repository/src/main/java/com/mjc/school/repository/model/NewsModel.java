@@ -18,35 +18,35 @@ import java.util.Objects;
 
 
 @Entity
-@Table(name = "NEWS")
+@Table(name = "news")
 @Component
 @AllArgsConstructor
 public class NewsModel implements BaseEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "NEWS_TITLE")
+    @Column(name = "news_title")
     @Size(min = 5, max = 30)
     private String title;
-    @Column(name = "NEWS_CONTENT")
+    @Column(name = "news_content")
     @Size(min = 5, max = 255)
     private String content;
     @CreatedDate
-    @Column(name = "CREATE_DATE")
+    @Column(name = "create_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDate;
     @LastModifiedDate
-    @Column(name = "LAST_UPDATE_DATE")
+    @Column(name = "last_update_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastUpdateDate;
-    @Column(name = "AUTHOR ID")
+    @Column(name = "author_id")
     private Long authorId;
     @ManyToOne
-    @JoinColumn(name = "AUTHOR_ID")
+    @JoinColumn(name = "author_id")
     private AuthorModel authorModel;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "TAGS_OF_NEWS", joinColumns = @JoinColumn(name = "NEWS_ID"), inverseJoinColumns = @JoinColumn(name = "TAGS_ID"))
+    @JoinTable(name = "tags_of_news", joinColumns = @JoinColumn(name = "news_id"), inverseJoinColumns = @JoinColumn(name = "tags_id"))
     private List<TagModel> tags = new ArrayList<>();
 
     public NewsModel() {
