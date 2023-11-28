@@ -17,26 +17,38 @@ public interface Mapper {
 
     Mapper INSTANCE = Mappers.getMapper(Mapper.class);
 
-    @Mappings(value = {@Mapping(target = "createDate", ignore = true),
-            @Mapping(target = "lastUpdateDate", ignore = true)})
-    @Mapping(source = "tags", target = "tags", qualifiedByName = "listLongToListTagModel")
+
+
+//    @Mappings(value = {@Mapping(target = "createDate", ignore = true),
+//            @Mapping(target = "lastUpdateDate", ignore = true)})
+//    @Mapping(source = "tags", target = "tags", qualifiedByName = "listLongToListTagModel")
+@Mapping(target = "createDate", ignore = true)
+@Mapping(target = "lastUpdateDate", ignore = true)
+@Mapping(source = "authorId", target = "authorModel.id")
     NewsModel DTONewsToModel(NewsDtoRequest newsDtoRequest);
-    NewsModel mapLongToTagModel(Long id);
-    List<NewsModel> listLongToListNewsModel(List<Long> news);
+
 
 
     NewsDtoResponse ModelNewsToDTO(NewsModel newsModel);
 
     @Mappings(value = {@Mapping(target = "createDate", ignore = true),
-            @Mapping(target = "lastUpdateDate", ignore = true)})
+            @Mapping(target = "lastUpdateDate", ignore = true),
+    @Mapping(target = "newsModelListWithId", ignore = true),
+            @Mapping(target = "id", ignore = true)})
     AuthorModel DtoAuthorToModel(AuthorDtoRequest authorDtoRequest);
 
     AuthorDtoResponse ModelAuthorToDTO(AuthorModel authorModel);
-
+    @Mappings({
+            @Mapping(target = "news", ignore = true),
+    })
     TagModel DtoTagsToModel(TagDtoRequest tagDtoRequest);
 
     @Named("listLongToListTagModel")
     List<TagModel> listLongToListTagModel(List<Long> tags);
+    @Mappings({
+            @Mapping(target = "name", ignore = true),
+            @Mapping(target = "news", ignore = true),
+    })
     TagModel map(Long id);
 
     TagDtoResponse ModelTagsToDto(TagModel tagModel);

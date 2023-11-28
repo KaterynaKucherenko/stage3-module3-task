@@ -1,25 +1,27 @@
 package com.mjc.school.repository.implementation;
 
-import com.mjc.school.repository.AuthRepository;
+
+import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.AuthorModel;
-import com.mjc.school.repository.model.NewsModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
+
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("authorRepository")
-public class AuthorRepository implements AuthRepository {
+public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public AuthorRepository(){}
+    public AuthorRepository() {
+    }
 
 
     @Override
@@ -31,7 +33,8 @@ public class AuthorRepository implements AuthRepository {
 
     @Override
     public Optional<AuthorModel> readById(Long id) {
-        return Optional.ofNullable((AuthorModel) entityManager.createQuery("SELECT a FROM AuthorModel a WHERE a.id = :id", AuthorModel.class).setParameter("id", id).getSingleResult());
+        //return Optional.ofNullable((AuthorModel) entityManager.createQuery("SELECT a FROM AuthorModel a WHERE a.id = :id", AuthorModel.class).setParameter("id", id).getSingleResult());
+        return Optional.ofNullable(entityManager.find(AuthorModel.class, id));
     }
 
 
@@ -67,11 +70,11 @@ public class AuthorRepository implements AuthRepository {
     }
 
 
-    public AuthorModel getAuthorByNewsId(Long newsId) {
-        NewsModel newsModel = entityManager.find(NewsModel.class, newsId);
-        if (newsModel != null) {
-            return entityManager.getReference(AuthorModel.class, newsModel.getAuthorId());
-        }
-        throw new EntityNotFoundException("News with " + newsId + " ID not found");
-    }
+//    public AuthorModel getAuthorByNewsId(Long newsId) {
+//        NewsModel newsModel = entityManager.find(NewsModel.class, newsId);
+//        if (newsModel != null) {
+//            return entityManager.getReference(AuthorModel.class, newsModel.getAuthorId());
+//        }
+//        throw new EntityNotFoundException("News with " + newsId + " ID not found");
+//    }
 }

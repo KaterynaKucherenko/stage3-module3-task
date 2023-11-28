@@ -1,11 +1,11 @@
 package com.mjc.school.controller.impl;
 
 
+import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotation.CommandBody;
 import com.mjc.school.controller.annotation.CommandHandler;
 import com.mjc.school.controller.annotation.CommandParam;
-
-import com.mjc.school.service.NewsService;
+import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 
@@ -15,11 +15,11 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller("newsController")
-public class NewsController implements com.mjc.school.controller.NewsController {
-    private final NewsService newsService;
+public class NewsController implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
+    private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService;
 
     @Autowired
-    public NewsController(NewsService newsService) {
+    public NewsController(BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService ) {
         this.newsService = newsService;
     }
 
@@ -53,10 +53,10 @@ public class NewsController implements com.mjc.school.controller.NewsController 
         return newsService.deleteById(id);
     }
 
-    @CommandHandler("6")
-    @Override
-    public List<NewsDtoResponse> getNewsByParams(String tagName, Long tagId, String authorName, String title, String content) {
-        List<NewsDtoResponse> news = newsService.getNewsByParams(tagName, tagId, authorName, title, content);
-        return news;
-    }
+//    @CommandHandler("6")
+//    @Override
+//    public List<NewsDtoResponse> getNewsByParams(String tagName, Long tagId, String authorName, String title, String content) {
+//        List<NewsDtoResponse> news = newsService.getNewsByParams(tagName, tagId, authorName, title, content);
+//        return news;
+//    }
 }

@@ -1,8 +1,8 @@
 package com.mjc.school.service.implementation;
 
-import com.mjc.school.repository.TagsRepository;
+import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.TagModel;
-import com.mjc.school.service.TagService;
+import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.TagDtoRequest;
 import com.mjc.school.service.dto.TagDtoResponse;
 import com.mjc.school.service.mapper.Mapper;
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service("tagsServiceImpl")
-public class TagsServiceImpl implements TagService {
-    private  TagsRepository tagsRepository;
+@Service("tagsService")
+public class TagsService implements BaseService<TagDtoRequest, TagDtoResponse, Long> {
+    private BaseRepository<TagModel, Long> tagsRepository;
 
     @Autowired
-    public TagsServiceImpl(TagsRepository tagsRepository) {
+    public TagsService(BaseRepository<TagModel, Long> tagsRepository) {
         this.tagsRepository = tagsRepository;
     }
 
@@ -48,8 +48,8 @@ public class TagsServiceImpl implements TagService {
 
     }
 
-    @Override
-    public List<TagDtoResponse> readTagsByNewsId(Long newsId) {
-        return tagsRepository.readTagsByNewsId(newsId).stream().map(Mapper.INSTANCE::ModelTagsToDto).toList();
-    }
+
+//    public List<TagDtoResponse> readTagsByNewsId(Long newsId) {
+//        return tagsRepository.readTagsByNewsId(newsId).stream().map(Mapper.INSTANCE::ModelTagsToDto).toList();
+//    }
 }

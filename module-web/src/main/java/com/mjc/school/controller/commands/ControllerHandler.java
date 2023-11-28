@@ -7,8 +7,9 @@ import com.mjc.school.controller.impl.TagsController;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.TagDtoRequest;
-import com.mjc.school.service.dto.TagDtoResponse;
-import com.mjc.school.service.implementation.AuthorServiceImpl;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ControllerHandler {
     private TagsController tagsController;
 
 
-
+@Autowired
     public ControllerHandler(AuthorController authorController, NewsController newsController, TagsController tagsController) {
         this.authorController = authorController;
         this.newsController = newsController;
@@ -118,7 +119,7 @@ public class ControllerHandler {
                 String title = scanner.nextLine();
                 System.out.println("Write the content for search news (press Enter to skip parameter)");
                 String content = scanner.nextLine();
-                newsController.getNewsByParams(tagName, tagId, authorName, title, content).stream().forEach(System.out::println);
+//                newsController.getNewsByParams(tagName, tagId, authorName, title, content).stream().forEach(System.out::println);
             } catch (Exception e) {
                 e.getMessage();
             }
@@ -142,11 +143,13 @@ public class ControllerHandler {
         boolean isValid = false;
         if (!isValid) {
             try {
-                System.out.println("Write the author name");
                 Scanner scanner = new Scanner(System.in);
+                System.out.println("Write the author name");
                 String name = scanner.nextLine();
-                AuthorDtoRequest authorDtoRequest = new AuthorDtoRequest(null, name, null);
+                AuthorDtoRequest authorDtoRequest = new AuthorDtoRequest(name);
+                System.out.println(authorDtoRequest);
                 System.out.println(authorController.create(authorDtoRequest));
+
             } catch (Exception e) {
                 e.getMessage();
             }
@@ -165,7 +168,7 @@ public class ControllerHandler {
                 Long authId = Long.parseLong(scanner.nextLine());
                 System.out.println("Write the new author name");
                 String name = scanner.nextLine();
-                authorController.update(new AuthorDtoRequest(authId, name, null));
+                authorController.update(new AuthorDtoRequest(name));
             } catch (Exception e) {
                 e.getMessage();
             }

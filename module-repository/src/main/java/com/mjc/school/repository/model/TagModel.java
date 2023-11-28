@@ -17,7 +17,7 @@ public class TagModel implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "tags_name")
+    @Column(nullable = false)
     @Size(min = 3, max = 15)
     private String name;
 

@@ -2,26 +2,26 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
 
-import com.mjc.school.repository.TagsRepository;
-import com.mjc.school.repository.model.NewsModel;
+
 import com.mjc.school.repository.model.TagModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
+
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TagRepository implements TagsRepository {
+public class TagRepository implements BaseRepository<TagModel, Long> {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public TagRepository(){}
+    public TagRepository() {
+    }
 
 
     @Override
@@ -71,13 +71,12 @@ public class TagRepository implements TagsRepository {
     }
 
 
-    @Override
-    public List<TagModel> readTagsByNewsId(Long newsId) {
-        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
-        if (newsModel != null) {
-            return newsModel.getTags();
-        }
-        throw new EntityNotFoundException("News with " + newsId + " ID not found");
-    }
+//    public List<TagModel> readTagsByNewsId(Long newsId) {
+//        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
+//        if (newsModel != null) {
+//            return newsModel.getTags();
+//        }
+//        throw new EntityNotFoundException("News with " + newsId + " ID not found");
+//    }
 }
 

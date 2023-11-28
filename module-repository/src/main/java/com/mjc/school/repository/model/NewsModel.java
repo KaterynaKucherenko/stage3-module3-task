@@ -25,24 +25,24 @@ public class NewsModel implements BaseEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "news_title")
+    @Column(nullable = false)
     @Size(min = 5, max = 30)
     private String title;
-    @Column(name = "news_content")
+    @Column(nullable = false)
     @Size(min = 5, max = 255)
     private String content;
     @CreatedDate
-    @Column(name = "create_date")
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDate;
     @LastModifiedDate
-    @Column(name = "last_update_date")
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime lastUpdateDate;
-    @Column(name = "author_id")
+    @Column(nullable = false)
     private Long authorId;
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(nullable = false)
     private AuthorModel authorModel;
 
     @ManyToMany(fetch = FetchType.LAZY)
