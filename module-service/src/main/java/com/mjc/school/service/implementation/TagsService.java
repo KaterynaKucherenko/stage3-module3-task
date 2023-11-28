@@ -47,9 +47,4 @@ public class TagsService implements BaseService<TagDtoRequest, TagDtoResponse, L
         return tagsRepository.deleteById(id);
 
     }
-
-
-//    public List<TagDtoResponse> readTagsByNewsId(Long newsId) {
-//        return tagsRepository.readTagsByNewsId(newsId).stream().map(Mapper.INSTANCE::ModelTagsToDto).toList();
-//    }
 }
