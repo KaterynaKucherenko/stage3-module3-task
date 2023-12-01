@@ -19,16 +19,6 @@ public class NewsDtoResponse {
     private Long authorId;
 
 
-//    public NewsDtoResponse(Long id, String title, String content, LocalDateTime createDate, LocalDateTime lastUpdateDate, Long authorId) {
-//        this.id = id;
-//        this.title = title;
-//        this.content = content;
-//        this.createDate = createDate;
-//        this.lastUpdateDate = lastUpdateDate;
-//        this.authorId = authorId;
-//
-//    }
-
     public Long getId() {
         return id;
     }

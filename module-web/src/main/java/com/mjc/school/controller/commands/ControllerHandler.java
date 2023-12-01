@@ -24,7 +24,7 @@ public class ControllerHandler {
     private TagsController tagsController;
 
 
-@Autowired
+    @Autowired
     public ControllerHandler(AuthorController authorController, NewsController newsController, TagsController tagsController) {
         this.authorController = authorController;
         this.newsController = newsController;

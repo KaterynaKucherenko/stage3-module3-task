@@ -33,11 +33,11 @@ public class NewsModel implements BaseEntity<Long>, Serializable {
     private String content;
     @CreatedDate
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = { "M/d/yy", "dd.MM.yyyy" })
     private LocalDateTime createDate;
     @LastModifiedDate
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = { "M/d/yy", "dd.MM.yyyy" })
     private LocalDateTime lastUpdateDate;
     @Column(nullable = false)
     private Long authorId;

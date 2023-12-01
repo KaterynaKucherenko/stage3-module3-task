@@ -22,7 +22,7 @@ public class NewsDtoRequest {
         this.title = title;
         this.content = content;
         this.authorId = authorId;
-        this.tags =tagsId;
+        this.tags = tagsId;
     }
 
     public Long getId() {

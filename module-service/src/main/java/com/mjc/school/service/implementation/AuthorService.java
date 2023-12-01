@@ -54,7 +54,6 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     }
 
 
-
 //    public AuthorDtoResponse getAuthorByNewsId(Long newsId) {
 //        return Mapper.INSTANCE.ModelAuthorToDTO(authorRepository.getAuthorByNewsId(newsId));
 //    }

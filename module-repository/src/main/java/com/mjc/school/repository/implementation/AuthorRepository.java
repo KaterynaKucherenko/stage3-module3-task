@@ -33,7 +33,6 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public Optional<AuthorModel> readById(Long id) {
-        //return Optional.ofNullable((AuthorModel) entityManager.createQuery("SELECT a FROM AuthorModel a WHERE a.id = :id", AuthorModel.class).setParameter("id", id).getSingleResult());
         return Optional.ofNullable(entityManager.find(AuthorModel.class, id));
     }
 
@@ -70,11 +69,4 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     }
 
 
-//    public AuthorModel getAuthorByNewsId(Long newsId) {
-//        NewsModel newsModel = entityManager.find(NewsModel.class, newsId);
-//        if (newsModel != null) {
-//            return entityManager.getReference(AuthorModel.class, newsModel.getAuthorId());
-//        }
-//        throw new EntityNotFoundException("News with " + newsId + " ID not found");
-//    }
 }

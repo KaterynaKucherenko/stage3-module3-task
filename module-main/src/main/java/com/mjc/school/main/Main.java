@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 import java.lang.reflect.InvocationTargetException;
+
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EntityScan(basePackages = {"com.mjc.school.repository.model"})

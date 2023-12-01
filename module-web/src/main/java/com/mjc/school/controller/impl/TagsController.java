@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
 @Controller("tagsController")
 public class TagsController implements BaseController<TagDtoRequest, TagDtoResponse, Long> {
     private BaseService<TagDtoRequest, TagDtoResponse, Long> tagsService;
-@Autowired
+
+    @Autowired
     public TagsController(BaseService<TagDtoRequest, TagDtoResponse, Long> tagsService) {
         this.tagsService = tagsService;
     }

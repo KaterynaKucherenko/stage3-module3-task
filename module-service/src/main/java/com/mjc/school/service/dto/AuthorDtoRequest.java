@@ -3,7 +3,6 @@ package com.mjc.school.service.dto;
 import lombok.Data;
 
 
-
 import java.util.List;
 
 @Data
@@ -11,8 +10,8 @@ public class AuthorDtoRequest {
 
     private String name;
 
-    public AuthorDtoRequest(String name){
-        this.name=name;
+    public AuthorDtoRequest(String name) {
+        this.name = name;
     }
 
 

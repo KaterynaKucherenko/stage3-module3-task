@@ -72,12 +72,5 @@ public class TagRepository implements BaseRepository<TagModel, Long> {
     }
 
 
-//    public List<TagModel> readTagsByNewsId(Long newsId) {
-//        NewsModel newsModel = entityManager.getReference(NewsModel.class, newsId);
-//        if (newsModel != null) {
-//            return newsModel.getTags();
-//        }
-//        throw new EntityNotFoundException("News with " + newsId + " ID not found");
-//    }
 }
 
