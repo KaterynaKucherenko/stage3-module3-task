@@ -4,7 +4,6 @@ import com.mjc.school.controller.annotation.CommandHandler;
 import com.mjc.school.controller.commands.ControllerHandler;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
