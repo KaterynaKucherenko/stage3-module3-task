@@ -1,6 +1,7 @@
 package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,7 +32,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public Optional<NewsModel> readById(Long id) {
-        return Optional.ofNullable((NewsModel) entityManager.createQuery("SELECT a FROM NewsModel a WHERE a.id = :id").setParameter("id", id).getSingleResult());
+        return Optional.ofNullable(entityManager.find(NewsModel.class, id));
     }
 
 

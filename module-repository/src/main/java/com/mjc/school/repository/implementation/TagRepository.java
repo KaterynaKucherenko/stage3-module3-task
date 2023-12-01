@@ -3,6 +3,7 @@ package com.mjc.school.repository.implementation;
 import com.mjc.school.repository.BaseRepository;
 
 
+import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.TagModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,7 +34,7 @@ public class TagRepository implements BaseRepository<TagModel, Long> {
 
     @Override
     public Optional<TagModel> readById(Long id) {
-        return Optional.ofNullable((TagModel) entityManager.createQuery("SELECT a FROM TagModel a WHERE a.id=:id", TagModel.class).setParameter("id", id).getSingleResult());
+        return Optional.ofNullable(entityManager.find(TagModel.class, id));
     }
 
 
